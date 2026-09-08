@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeSim</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="loginScreen" class="screen">
+    <div class="login-card">
+      <div class="logo">LIFE<span>SIM</span></div>
+      <p class="muted">Build a virtual life. Work. Drive. Spend. Level up.</p>
+      <input id="playerName" placeholder="Enter your player name" maxlength="20">
+      <button onclick="startGame()">Start Life</button>
+      <small>Simulation only. No real money or financial accounts.</small>
+    </div>
+  </div>
+
+  <div id="game" class="hidden">
+    <header>
+      <div class="logo">LIFE<span>SIM</span></div>
+      <div class="top-right">
+        <span id="playerLabel"></span>
+        <button class="ghost" onclick="resetGame()">Reset</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <p class="eyebrow">YOUR CITY. YOUR LIFE.</p>
+          <h1 id="heroTitle">Build your virtual life.</h1>
+          <p class="muted">Choose a career, earn money, buy cars, upgrade your home, and explore the city.</p>
+        </div>
+        <div class="level-box"><span>LEVEL</span><strong id="level">1</strong></div>
+      </section>
+
+      <section class="stats">
+        <div class="card balance"><span>Checking</span><strong id="checking">$500</strong><small>Available balance</small></div>
+        <div class="card"><span>Savings</span><strong id="savings">$0</strong><small>Emergency fund</small></div>
+        <div class="card"><span>Credit score</span><strong id="credit">650</strong><small>Virtual score</small></div>
+        <div class="card"><span>Career</span><strong id="job">Unemployed</strong><small id="salary">$0 / week</small></div>
+      </section>
+
+      <nav class="tabs">
+        <button class="active" onclick="showTab('city', this)">🏙️ City</button>
+        <button onclick="showTab('bank', this)">🏦 Bank</button>
+        <button onclick="showTab('jobs', this)">💼 Jobs</button>
+        <button onclick="showTab('cars', this)">🚗 Dealership</button>
+        <button onclick="showTab('homeTab', this)">🏠 Home</button>
+      </nav>
+
+      <section id="city" class="tab">
+        <div class="section-head">
+          <div><h2>LifeSim City</h2><p class="muted">Pick a place to visit.</p></div>
+          <span class="pill">Day <b id="day">1</b></span>
+        </div>
+        <div class="city-grid">
+          <button class="location" onclick="visit('Bank','Manage your checking, savings and card.')"><span>🏦</span><b>Bank</b><small>Money & cards</small></button>
+          <button class="location" onclick="visit('City Motors','Shop for your next ride.')"><span>🚗</span><b>City Motors</b><small>Cars & garage</small></button>
+          <button class="location" onclick="visit('Job Center','Find a career and collect your paycheck.')"><span>💼</span><b>Job Center</b><small>Careers</small></button>
+          <button class="location" onclick="visit('Emergency HQ','Take community response missions.')"><span>🚨</span><b>Emergency HQ</b><small>Response missions</small></button>
+          <button class="location" onclick="visit('Home','Upgrade your virtual home.')"><span>🏠</span><b>Your Home</b><small>Home upgrades</small></button>
+          <button class="location" onclick="newEvent()"><span>🎯</span><b>Random Event</b><small>Earn a quick reward</small></button>
+        </div>
+        <div class="card city-status"><h2 id="visitTitle">Welcome to LifeSim City</h2><p id="visitText" class="muted">Your next move is up to you.</p></div>
+      </section>
+
+      <section id="bank" class="tab hidden">
+        <div class="grid two">
+          <div class="card">
+            <h2>Virtual debit card</h2>
+            <div class="debit-card">
+              <div class="chip"></div><div class="card-number">•••• •••• •••• 4827</div>
+              <div class="card-bottom"><span id="cardName">PLAYER</span><span>LIFESIM</span></div>
+            </div>
+            <p class="muted">For in-game purchases only.</p>
+          </div>
+          <div class="card">
+            <h2>Quick actions</h2>
+            <div class="actions">
+              <button onclick="deposit()">Move $100 to savings</button>
+              <button onclick="buyFood()">Buy food - $25</button>
+              <button onclick="payBill()">Pay bill - $75</button>
+              <button onclick="collectPaycheck()">Collect paycheck</button>
+            </div>
+          </div>
+        </div>
+        <div class="card"><h2>Recent transactions</h2><div id="transactions" class="transactions"></div></div>
+      </section>
+
+      <section id="jobs" class="tab hidden">
+        <div class="section-head"><div><h2>Job Center</h2><p class="muted">Pick a career and collect a weekly paycheck.</p></div></div>
+        <div id="jobsGrid" class="job-grid"></div>
+      </section>
+
+      <section id="cars" class="tab hidden">
+        <div class="section-head"><div><h2>City Motors</h2><p class="muted">Build your virtual garage.</p></div><strong id="carCount">0 cars</strong></div>
+        <div id="carsGrid" class="car-grid"></div>
+        <div class="card"><h2>Your Garage</h2><div id="garage" class="garage"></div></div>
+      </section>
+
+      <section id="homeTab" class="tab hidden">
+        <div class="grid two">
+          <div class="card">
+            <h2>🏠 Home</h2><p id="home">Living with parents</p>
+            <button onclick="upgradeHome()">Upgrade home</button>
+            <p class="muted" id="homeNext"></p>
+          </div>
+          <div class="card">
+            <h2>🚨 Community missions</h2><p id="eventText">No active call.</p>
+            <button onclick="newEvent()">Get a mission</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
